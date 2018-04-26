@@ -62,7 +62,7 @@ if [ $target = "linux" ] ; then
 
   # copy all the binaries to the install directory
   cd ${WORKING_DIR}
-  INSTALL_DIR=${WORKING_DIR}/install
+  INSTALL_DIR=${WORKING_DIR}/install/lib
   mkdir $INSTALL_DIR
   cp -v ${ACE_ROOT}/ace/libACE.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE.so.${version} ${INSTALL_DIR}/libACE.so

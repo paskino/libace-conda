@@ -65,5 +65,7 @@ install(FILES
 install(DIRECTORY
     ${CMAKE_BINARY_DIR}/src/install/include/ace
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+    PATTERN "*.h"
+    PATTERN "*.inl"
 )
 
