@@ -48,7 +48,10 @@ echo $version
 if [ $target = "linux" ] ; then
   mkdir src 
   cd src 
-  wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
+  if [ ! -f ACE-${version}.zip ] 
+  then
+    wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
+  fi
   unzip ACE-${version}.zip
   WORKING_DIR=`pwd`
   echo ${WORKING_DIR}
