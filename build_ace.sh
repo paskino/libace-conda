@@ -36,7 +36,7 @@ if [ $target = "linux" ] ; then
   cd ../include/makeinclude
   ln -s platform_linux.GNU platform_macros.GNU 
   cd ../../ace 
-  make -j2
+  #make -j2
 
   # copy all the binaries to the install directory
   cd ${WORKING_DIR}
