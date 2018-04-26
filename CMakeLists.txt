@@ -5,12 +5,17 @@ project(libACE)
 set(ACE_VERSION "6.4.7" CACHE  STRING "ACE version")
 
 if (UNIX)
+  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh ${CMAKE_BINARY_DIR})
   execute_process(COMMAND 
     bash build_ace.sh -p linux -v ${ACE_VERSION}
+    RESULT_VARIABLE HAS_BUILT
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
 else()
   message(FATAL_ERROR "Builds only on Linux so far")
 endif()
+
+message("Has it built? ${HAS_BUILT}")
 
 install(FILES
     ${CMAKE_BINARY_DIR}/src/install/libACE.so

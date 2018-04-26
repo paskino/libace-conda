@@ -26,7 +26,7 @@ echo $target
 if [ $target = "linux" ] ; then
   mkdir src 
   cd src 
-  #wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
+  wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
   unzip ACE-${version}.zip
   WORKING_DIR=`pwd`
   echo ${WORKING_DIR}
