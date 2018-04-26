@@ -78,4 +78,23 @@ if [ $target = "linux" ] ; then
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}/libACE_Monitor_Control.so
 
+  #include
+  INCLUDE_DIR=${INSTALL_DIR}/include
+  mkdir ${INCLUDE_DIR}/ace/os_include
+  mkdir ${INCLUDE_DIR}/ace/Monitor_Control
+  mkdir ${INCLUDE_DIR}/ace/SSL
+  mkdir ${INCLUDE_DIR}/ace/ETCL
+  h=`find ${ACE_ROOT}/ace/ -name '*.h' | sed 's/src\/ACE_wrappers\///'`
+
+  for ff in h;
+  do 
+    cp -v ${ACE_ROOT}/$ff ${INCLUDE_DIR}/$ff
+  done
+  h=`find ${ACE_ROOT}/ace/ -name '*.inl' | sed 's/src\/ACE_wrappers\///'`
+
+  for ff in h;
+  do 
+    cp -v ${ACE_ROOT}/$ff ${INCLUDE_DIR}/$ff
+  done
+
 fi

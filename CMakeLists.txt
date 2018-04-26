@@ -62,4 +62,8 @@ install(FILES
     ${CMAKE_BINARY_DIR}/src/install/libACE_Monitor_Control.so.${ACE_VERSION}
     DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
+install(DIRECTORY
+    ${CMAKE_BINARY_DIR}/src/install/include/ace
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+)
 
