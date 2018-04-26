@@ -84,7 +84,7 @@ if [ $target = "linux" ] ; then
   ln -s ${INSTALL_DIR}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}/libACE_Monitor_Control.so
 
   #include
-  INCLUDE_DIR=${INSTALL_DIR}/include
+  INCLUDE_DIR=${WORKING_DIR}/install/include
   mkdir -p ${INCLUDE_DIR}/ace/os_include
   mkdir ${INCLUDE_DIR}/ace/Monitor_Control
   mkdir ${INCLUDE_DIR}/ace/SSL
