@@ -20,12 +20,14 @@
 #=========================================================================
 
 version="6.4.7"
-while getopts p:v:h option
+threads=2
+while getopts p:v:j:h option
  do
  case "${option}"
   in
   p) target=$OPTARG;;
   v) version=$OPTARG;;
+  j) threads=$OPTARG;;
   h)
    echo "Usage: $0 -p platform [-v ACE_Version]"
    echo "Use the platform option to build for a specific platform."
@@ -56,7 +58,7 @@ if [ $target = "linux" ] ; then
   cd ../include/makeinclude
   ln -s platform_linux.GNU platform_macros.GNU 
   cd ../../ace 
-  make -j2
+  make -j${threads}
 
   # copy all the binaries to the install directory
   cd ${WORKING_DIR}
@@ -80,21 +82,23 @@ if [ $target = "linux" ] ; then
 
   #include
   INCLUDE_DIR=${INSTALL_DIR}/include
-  mkdir ${INCLUDE_DIR}/ace/os_include
+  mkdir -p ${INCLUDE_DIR}/ace/os_include
   mkdir ${INCLUDE_DIR}/ace/Monitor_Control
   mkdir ${INCLUDE_DIR}/ace/SSL
   mkdir ${INCLUDE_DIR}/ace/ETCL
-  h=`find ${ACE_ROOT}/ace/ -name '*.h' | sed 's/src\/ACE_wrappers\///'`
+  h=`find ${ACE_ROOT}/ace/ -name '*.h' | sed 's/${ACE_ROOT}\///'`
 
-  for ff in h;
+  for ff in $h;
   do 
-    cp -v ${ACE_ROOT}/$ff ${INCLUDE_DIR}/$ff
+    echo "copying $ff ${INCLUDE_DIR}"
+    cp -v $ff ${INCLUDE_DIR}
   done
-  h=`find ${ACE_ROOT}/ace/ -name '*.inl' | sed 's/src\/ACE_wrappers\///'`
+  h=`find ${ACE_ROOT}/ace/ -name '*.inl' | sed 's/${ACE_ROOT}\///'`
 
-  for ff in h;
+  for ff in $h;
   do 
-    cp -v ${ACE_ROOT}/$ff ${INCLUDE_DIR}/$ff
+    echo "copying $ff ${INCLUDE_DIR}/"
+    cp -v $ff ${INCLUDE_DIR}
   done
 
 fi
