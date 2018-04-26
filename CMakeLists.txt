@@ -60,7 +60,7 @@ install(FILES
     ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so.${ACE_VERSION}
     ${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so.${ACE_VERSION}
     ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so.${ACE_VERSION}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
 )
 install(DIRECTORY
     ${CMAKE_BINARY_DIR}/src/install/include/ace
