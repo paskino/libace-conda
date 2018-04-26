@@ -1,4 +1,23 @@
 #!/bin/bash
+#========================================================================
+# Author: Edoardo Pasca
+# Author: Ben Thomas
+# Copyright 2016 - 2018 University College London
+# Copyright 2016 - 2018 Science Technology Facilities Council
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0.txt
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+#=========================================================================
 
 version="6.4.7"
 while getopts p:v:h option
@@ -22,6 +41,7 @@ while getopts p:v:h option
 done
 
 echo $target
+echo $version
 
 if [ $target = "linux" ] ; then
   mkdir src 
@@ -36,7 +56,7 @@ if [ $target = "linux" ] ; then
   cd ../include/makeinclude
   ln -s platform_linux.GNU platform_macros.GNU 
   cd ../../ace 
-  #make -j2
+  make -j2
 
   # copy all the binaries to the install directory
   cd ${WORKING_DIR}
