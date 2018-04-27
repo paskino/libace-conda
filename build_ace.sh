@@ -64,9 +64,12 @@ if [ $target = "linux" ] ; then
   make -j${threads}
 
   # copy all the binaries to the install directory
+  echo "**************************************************************"
+  echo "Copying to install directory"
+  echo "**************************************************************"
   cd ${WORKING_DIR}
   INSTALL_DIR=${WORKING_DIR}/install/lib
-  mkdir $INSTALL_DIR
+  mkdir -p $INSTALL_DIR
   cp -v ${ACE_ROOT}/ace/libACE.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE.so.${version} ${INSTALL_DIR}/libACE.so
 
@@ -83,25 +86,25 @@ if [ $target = "linux" ] ; then
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}/libACE_Monitor_Control.so
 
-  #include
-  INCLUDE_DIR=${WORKING_DIR}/install/include
-  mkdir -p ${INCLUDE_DIR}/ace/os_include
-  mkdir ${INCLUDE_DIR}/ace/Monitor_Control
-  mkdir ${INCLUDE_DIR}/ace/SSL
-  mkdir ${INCLUDE_DIR}/ace/ETCL
-  h=`find ${ACE_ROOT}/ace/ -name '*.h' | sed 's/${ACE_ROOT}\///'`
-
-  for ff in $h;
-  do 
-    echo "copying $ff ${INCLUDE_DIR}"
-    cp -v $ff ${INCLUDE_DIR}
-  done
-  h=`find ${ACE_ROOT}/ace/ -name '*.inl' | sed 's/${ACE_ROOT}\///'`
-
-  for ff in $h;
-  do 
-    echo "copying $ff ${INCLUDE_DIR}/"
-    cp -v $ff ${INCLUDE_DIR}
-  done
-
+#  #include
+#  INCLUDE_DIR=${WORKING_DIR}/install/include
+#  mkdir -p ${INCLUDE_DIR}/ace/os_include
+#  mkdir ${INCLUDE_DIR}/ace/Monitor_Control
+#  mkdir ${INCLUDE_DIR}/ace/SSL
+#  mkdir ${INCLUDE_DIR}/ace/ETCL
+#  h=`find ${ACE_ROOT}/ace/ -name '*.h' | sed 's/${ACE_ROOT}\///'`
+#
+#  for ff in $h;
+#  do 
+#    echo "copying $ff ${INCLUDE_DIR}"
+#    cp -v $ff ${INCLUDE_DIR}
+#  done
+#  h=`find ${ACE_ROOT}/ace/ -name '*.inl' | sed 's/${ACE_ROOT}\///'`
+#
+#  for ff in $h;
+#  do 
+#    echo "copying $ff ${INCLUDE_DIR}/"
+#    cp -v $ff ${INCLUDE_DIR}
+#  done
+#
 fi

@@ -28,7 +28,7 @@ if (UNIX)
                  ${CMAKE_BINARY_DIR}
                  COPYONLY)
   execute_process(COMMAND 
-    bash build_ace.sh -p linux -v ${ACE_VERSION}
+    bash build_ace.sh -p linux -v ${ACE_VERSION} -j2
     RESULT_VARIABLE HAS_BUILT
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
@@ -63,8 +63,8 @@ install(FILES
     DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
 )
 install(DIRECTORY
-    ${CMAKE_BINARY_DIR}/src/install/include/ace
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+    ${CMAKE_BINARY_DIR}/src/ACE_wrappers/ace
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/
     PATTERN "*.h"
     PATTERN "*.inl"
 )
