@@ -97,7 +97,7 @@ if [ $target = "linux" ] ; then
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}/libACE_Monitor_Control.so
 
-elif [ $target = "macosx" ] 
+elif [ $target = "macosx" ] ; then
  
   cp -v ${ACE_ROOT}/ace/libACE.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/ETCL/libACE_ETCL.dylib ${INSTALL_DIR}
