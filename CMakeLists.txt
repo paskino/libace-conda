@@ -32,8 +32,17 @@ if (UNIX)
     RESULT_VARIABLE HAS_BUILT
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
+elseif (APPLE)
+  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
+                 ${CMAKE_BINARY_DIR}
+                 COPYONLY)
+  execute_process(COMMAND 
+    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j2
+    RESULT_VARIABLE HAS_BUILT
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
 else()
-  message(FATAL_ERROR "Builds only on Linux so far")
+  message(FATAL_ERROR "Builds only on Linux and MacOSX so far")
 endif()
 
 
@@ -46,22 +55,39 @@ endif()
 #    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/ace
 #    VERBATIM
 #)
-
-install(FILES
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE.so.${ACE_VERSION}
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.so.${ACE_VERSION}
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.so.${ACE_VERSION}
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so.${ACE_VERSION}
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so.${ACE_VERSION}
-    ${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so.${ACE_VERSION}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
-)
+if (UNIX)
+	install(FILES
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE.so.${ACE_VERSION}
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.so.${ACE_VERSION}
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.so.${ACE_VERSION}
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so.${ACE_VERSION}
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so.${ACE_VERSION}
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so.${ACE_VERSION}
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+	)
+elseif (APPLE)
+	install(FILES
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE.dylib
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.dylib
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.dylib
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.dylib
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.dylib
+		${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.dylib
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE.so.${ACE_VERSION}
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL.so.${ACE_VERSION}
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE_ETCL_Parser.so.${ACE_VERSION}
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE_Compression.so.${ACE_VERSION}
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE_RLECompression.so.${ACE_VERSION}
+		#${CMAKE_BINARY_DIR}/src/install/lib/libACE_Monitor_Control.so.${ACE_VERSION}
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+	)
+endif()
 install(DIRECTORY
     ${CMAKE_BINARY_DIR}/src/ACE_wrappers/ace
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/

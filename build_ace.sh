@@ -97,6 +97,15 @@ if [ $target = "linux" ] ; then
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}/libACE_Monitor_Control.so
 
+ elif [ $target = "macosx" ] 
+ 
+  cp -v ${ACE_ROOT}/ace/libACE.dylib ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/ETCL/libACE_ETCL.dylib ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/ETCL/libACE_ETCL_Parser.dylib ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/Compression/libACE_Compression.dylib ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
+fi
 #  #include
 #  INCLUDE_DIR=${WORKING_DIR}/install/include
 #  mkdir -p ${INCLUDE_DIR}/ace/os_include
