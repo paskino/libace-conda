@@ -45,31 +45,42 @@ done
 echo $target
 echo $version
 
+mkdir src 
+cd src 
+if [ ! -f ACE-${version}.zip ] 
+then
+  wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
+fi
+unzip ACE-${version}.zip
+WORKING_DIR=`pwd`
+echo ${WORKING_DIR}
+export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
+
 if [ $target = "linux" ] ; then
-  mkdir src 
-  cd src 
-  if [ ! -f ACE-${version}.zip ] 
-  then
-    wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
-  fi
-  unzip ACE-${version}.zip
-  WORKING_DIR=`pwd`
-  echo ${WORKING_DIR}
-  export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
   cd ${ACE_ROOT}/ace
   ln -s config-linux.h config.h
   cd ../include/makeinclude
-  ln -s platform_linux.GNU platform_macros.GNU 
-  cd ../../ace 
-  make -j${threads}
+  ln -s platform_linux.GNU platform_macros.GNU
+  cd ../../ace  
+elif [ $target = "macosx" ] ; then
+  cd ${ACE_ROOT}/ace
+  ln -s config-macosx.h config.h
+  cd ../include/makeinclude
+  ln -s platform_macosx.GNU platform_macros.GNU
+  cd ../../ace  
+fi
 
+ 
+make -j${threads}
   # copy all the binaries to the install directory
-  echo "**************************************************************"
-  echo "Copying to install directory"
-  echo "**************************************************************"
-  cd ${WORKING_DIR}
-  INSTALL_DIR=${WORKING_DIR}/install/lib
-  mkdir -p $INSTALL_DIR
+echo "**************************************************************"
+echo "Copying to install directory"
+echo "**************************************************************"
+cd ${WORKING_DIR}
+INSTALL_DIR=${WORKING_DIR}/install/lib
+mkdir -p $INSTALL_DIR
+if [ $target = "linux" ] ; then
+  
   cp -v ${ACE_ROOT}/ace/libACE.so.${version} ${INSTALL_DIR}
   ln -s ${INSTALL_DIR}/libACE.so.${version} ${INSTALL_DIR}/libACE.so
 
