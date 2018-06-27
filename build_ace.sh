@@ -49,7 +49,7 @@ mkdir src
 cd src 
 if [ ! -f ACE-${version}.zip ] 
 then
-  wget http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
+  wget -nc http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
 fi
 unzip ACE-${version}.zip
 WORKING_DIR=`pwd`
