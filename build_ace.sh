@@ -51,7 +51,7 @@ if [ ! -f ACE-${version}.zip ]
 then
   wget -nc http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
 fi
-unzip ACE-${version}.zip
+unzip -n ACE-${version}.zip
 WORKING_DIR=`pwd`
 echo ${WORKING_DIR}
 export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
