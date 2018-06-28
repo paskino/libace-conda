@@ -20,42 +20,63 @@
 cmake_minimum_required(VERSION 3.3.0)
 
 project(libACE)
+include(ExternalProject)
 
 set(ACE_VERSION "6.4.7" CACHE  STRING "ACE version")
 
 if (UNIX)
-  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
-                 ${CMAKE_BINARY_DIR}
-                 COPYONLY)
-  execute_process(COMMAND 
-    bash build_ace.sh -p linux -v ${ACE_VERSION} -j2
-    RESULT_VARIABLE HAS_BUILT
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
-elseif (APPLE)
-  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
-                 ${CMAKE_BINARY_DIR}
-                 COPYONLY)
-  execute_process(COMMAND 
-    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j2
-    RESULT_VARIABLE HAS_BUILT
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
-else()
-  message(FATAL_ERROR "Builds only on Linux and MacOSX so far")
+elseif(APPLE)
 endif()
 
+configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
+                 ${CMAKE_BINARY_DIR}
+                  COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/configure_ace.sh 
+                 ${CMAKE_BINARY_DIR}
+                  COPYONLY)
+ExternalProject_Add(
+  ACE
+  URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
+  #CONFIGURE_COMMAND bash configure_ace.sh -p
+  #BINARY_DIR ${CMAKE_BINARY_DIR}
+  #SOURCE_DIR ${CMAKE_SOURCE_DIR}
+  INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
+  #BUILD_COMMAND make -j1 VERBOSE=1
+  
+)
 
-if (${HAS_BUILT})
-  message(FATAL_ERROR "Configure or build error occurred.")
-endif()
+#if (UNIX)
+#  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
+#                 ${CMAKE_BINARY_DIR}
+#                 COPYONLY)
+#  execute_process(COMMAND 
+#    bash build_ace.sh -p linux -v ${ACE_VERSION} -j2
+#    RESULT_VARIABLE HAS_BUILT
+#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#  )
+#elseif (APPLE)
+#  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
+#                 ${CMAKE_BINARY_DIR}
+#                 COPYONLY)
+#  execute_process(COMMAND 
+#    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j2
+#    RESULT_VARIABLE HAS_BUILT
+#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#  )
+#else()
+#  message(FATAL_ERROR "Builds only on Linux and MacOSX so far")
+#endif()
+
+
+#if (${HAS_BUILT})
+#  message(FATAL_ERROR "Configure or build error occurred.")
+#endif()
 
 #add_custom_target(libACE ALL
 #    command make -j2
 #    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/ace
 #    VERBATIM
 #)
-add_custom_target(FAKE ALL)
 if (UNIX)
 	install(FILES
 		${CMAKE_BINARY_DIR}/src/install/lib/libACE.so
