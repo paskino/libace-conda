@@ -55,6 +55,7 @@ endif()
 #    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/ace
 #    VERBATIM
 #)
+add_custom_target(FAKE ALL)
 if (UNIX)
 	install(FILES
 		${CMAKE_BINARY_DIR}/src/install/lib/libACE.so
