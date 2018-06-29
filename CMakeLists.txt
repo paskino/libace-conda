@@ -28,7 +28,7 @@ if (UNIX)
                  ${CMAKE_BINARY_DIR}
                  COPYONLY)
   execute_process(COMMAND 
-    bash build_ace.sh -p linux -v ${ACE_VERSION} -j2
+    bash build_ace.sh -p linux -v ${ACE_VERSION} -j1
     RESULT_VARIABLE HAS_BUILT
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
@@ -37,7 +37,7 @@ elseif (APPLE)
                  ${CMAKE_BINARY_DIR}
                  COPYONLY)
   execute_process(COMMAND 
-    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j2
+    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j1
     RESULT_VARIABLE HAS_BUILT
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
