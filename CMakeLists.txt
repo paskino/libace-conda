@@ -45,7 +45,7 @@ ExternalProject_Add(
   #BUILD_COMMAND ""
 
   INSTALL_COMMAND ""
-  INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0
+  INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0 -i ${CMAKE_INSTALL_PREFIX}
   #CONFIGURE_COMMAND cmake -E environment
   BINARY_DIR ${CMAKE_BINARY_DIR}/build/
   #SOURCE_DIR ${CMAKE_SOURCE_DIR}

@@ -80,11 +80,11 @@ if [ $target = "linux" ] ; then
   if [ -h ${INSTALL_DIR}/libACE_ETCL.so ] ; then
     rm  ${INSTALL_DIR}/libACE_ETCL.so
   fi
-  ln -s ${INSTALL_DIR}/libACE_ETCL.so ${INSTALL_DIR}/libACE_ETCL.so
+  ln -s ${INSTALL_DIR}/libACE_ETCL.so.${version} ${INSTALL_DIR}/libACE_ETCL.so
   if [ -h ${INSTALL_DIR}/libACE_ETCL_Parser.so ] ; then
     rm  ${INSTALL_DIR}/libACE_ETCL_Parser.so
   fi
-  ln -s ${INSTALL_DIR}/libACE_ETCL_Parser_Parser.so.${version} ${INSTALL_DIR}/libACE_ETCL_Parser.so
+  ln -s ${INSTALL_DIR}/libACE_ETCL_Parser.so.${version} ${INSTALL_DIR}/libACE_ETCL_Parser.so
 
   cp -v ${ACE_ROOT}/ace/Compression/libACE_Compression.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_Compression.so ] ; then
