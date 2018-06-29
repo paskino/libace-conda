@@ -20,14 +20,18 @@
 #=========================================================================
 
 version="6.4.7"
-threads=2
-while getopts p:v:j:h option
+threads=1
+is_build="1"
+while getopts p:v:j:s:i:b:h option
  do
  case "${option}"
   in
   p) target=$OPTARG;;
   v) version=$OPTARG;;
   j) threads=$OPTARG;;
+  s) src=$OPTARG;;
+  i) INSTALL_DIR=${OPTARG};;
+  b) is_build=${OPTARG};;
   h)
    echo "Usage: $0 -p platform [-v ACE_Version]"
    echo "Use the platform option to build for a specific platform."
@@ -45,39 +49,23 @@ done
 echo $target
 echo $version
 
-mkdir src 
-cd src 
-if [ ! -f ACE-${version}.zip ] 
-then
-  wget -nc http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
-fi
-unzip -n ACE-${version}.zip
-WORKING_DIR=`pwd`
+#mkdir src 
+#cd src 
+WORKING_DIR=${src}
 echo ${WORKING_DIR}
-export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
+#export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
+export ACE_ROOT=${WORKING_DIR}/
 
-if [ $target = "linux" ] ; then
-  cd ${ACE_ROOT}/ace
-  ln -s config-linux.h config.h
-  cd ../include/makeinclude
-  ln -s platform_linux.GNU platform_macros.GNU
-  cd ../../ace  
-elif [ $target = "macosx" ] ; then
-  cd ${ACE_ROOT}/ace
-  ln -s config-macosx.h config.h
-  cd ../include/makeinclude
-  ln -s platform_macosx.GNU platform_macros.GNU
-  cd ../../ace  
-fi
-
- 
-make -j${threads}
+cd ${ACE_ROOT}/ace 
+if [ ${is_build} = "1" ]; then
+  make -j${threads}
+else
   # copy all the binaries to the install directory
 echo "**************************************************************"
 echo "Copying to install directory"
 echo "**************************************************************"
 cd ${WORKING_DIR}
-INSTALL_DIR=${WORKING_DIR}/install/lib
+#INSTALL_DIR=${WORKING_DIR}/install/lib
 mkdir -p $INSTALL_DIR
 if [ $target = "linux" ] ; then
   
@@ -92,11 +80,11 @@ if [ $target = "linux" ] ; then
   if [ -h ${INSTALL_DIR}/libACE_ETCL.so ] ; then
     rm  ${INSTALL_DIR}/libACE_ETCL.so
   fi
-  ln -s ${INSTALL_DIR}/libACE_ETCL.so ${INSTALL_DIR}/libACE_ETCL.so
+  ln -s ${INSTALL_DIR}/libACE_ETCL.so.${version} ${INSTALL_DIR}/libACE_ETCL.so
   if [ -h ${INSTALL_DIR}/libACE_ETCL_Parser.so ] ; then
     rm  ${INSTALL_DIR}/libACE_ETCL_Parser.so
   fi
-  ln -s ${INSTALL_DIR}/libACE_ETCL_Parser_Parser.so.${version} ${INSTALL_DIR}/libACE_ETCL_Parser.so
+  ln -s ${INSTALL_DIR}/libACE_ETCL_Parser.so.${version} ${INSTALL_DIR}/libACE_ETCL_Parser.so
 
   cp -v ${ACE_ROOT}/ace/Compression/libACE_Compression.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_Compression.so ] ; then
@@ -123,4 +111,7 @@ elif [ $target = "macosx" ] ; then
   cp -v ${ACE_ROOT}/ace/Compression/libACE_Compression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
+fi
+rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace/ ${INSTALL_DIR}/include
+rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace/ ${INSTALL_DIR}/include
 fi
