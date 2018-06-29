@@ -125,7 +125,7 @@ elseif (APPLE)
 	)
 endif()
 install(DIRECTORY
-    ${CMAKE_BINARY_DIR}/src/ACE_wrappers/ace
+    ${CMAKE_BINARY_DIR}/build/ace
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/
     PATTERN "*.h"
     PATTERN "*.inl"
