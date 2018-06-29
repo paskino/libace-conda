@@ -41,14 +41,12 @@ ExternalProject_Add(
   #URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
   URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
   CONFIGURE_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/configure_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
-  BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
-  #BUILD_COMMAND ""
 
-  INSTALL_COMMAND ""
+  BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
+
   INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0 -i ${CMAKE_INSTALL_PREFIX}
-  #CONFIGURE_COMMAND cmake -E environment
+  LOG_INSTALL 1
   BINARY_DIR ${CMAKE_BINARY_DIR}/build/
-  #SOURCE_DIR ${CMAKE_SOURCE_DIR}
   INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
   STAMP_DIR ${CMAKE_BINARY_DIR}/stamp
   TMP_DIR ${CMAKE_BINARY_DIR}/tmp
