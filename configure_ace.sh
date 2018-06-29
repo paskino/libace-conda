@@ -21,13 +21,14 @@
 
 version="6.4.7"
 threads=2
-while getopts p:v:j:h option
+while getopts p:v:j:s:h option
  do
  case "${option}"
   in
   p) target=$OPTARG;;
   v) version=$OPTARG;;
   j) threads=$OPTARG;;
+  s) src=$OPTARG;;
   h)
    echo "Usage: $0 -p platform [-v ACE_Version]"
    echo "Use the platform option to build for a specific platform."
@@ -52,9 +53,11 @@ echo $version
 #  wget -nc http://download.dre.vanderbilt.edu/previous_versions/ACE-${version}.zip
 #fi
 #unzip -n ACE-${version}.zip
-WORKING_DIR=`pwd`
+#WORKING_DIR=`pwd`
+WORKING_DIR=${src}
 echo ${WORKING_DIR}
-export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
+#export ACE_ROOT=${WORKING_DIR}/ACE_wrappers
+export ACE_ROOT=${WORKING_DIR}/
 
 if [ $target = "linux" ] ; then
   cd ${ACE_ROOT}/ace

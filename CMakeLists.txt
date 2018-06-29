@@ -25,7 +25,9 @@ include(ExternalProject)
 set(ACE_VERSION "6.4.7" CACHE  STRING "ACE version")
 
 if (UNIX)
+  set (platform "linux")
 elseif(APPLE)
+  set (platform "macosx")
 endif()
 
 configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
@@ -36,12 +38,24 @@ configure_file(${CMAKE_SOURCE_DIR}/configure_ace.sh
                   COPYONLY)
 ExternalProject_Add(
   ACE
-  URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
-  #CONFIGURE_COMMAND bash configure_ace.sh -p
-  #BINARY_DIR ${CMAKE_BINARY_DIR}
+  #URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
+  URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
+  CONFIGURE_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/configure_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
+  BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
+  #BUILD_COMMAND ""
+
+  INSTALL_COMMAND ""
+  INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0
+  #CONFIGURE_COMMAND cmake -E environment
+  BINARY_DIR ${CMAKE_BINARY_DIR}/build/
   #SOURCE_DIR ${CMAKE_SOURCE_DIR}
   INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
+  STAMP_DIR ${CMAKE_BINARY_DIR}/stamp
+  TMP_DIR ${CMAKE_BINARY_DIR}/tmp
+  DOWNLOAD_DIR ${CMAKE_BINARY_DIR}/download
+  SOURCE_DIR ${CMAKE_BINARY_DIR}/source
   #BUILD_COMMAND make -j1 VERBOSE=1
+  STEP_TARGETS install_
   
 )
 
