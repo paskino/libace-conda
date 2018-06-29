@@ -42,9 +42,6 @@ ExternalProject_Add(
   URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
   CONFIGURE_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/configure_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
   BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
-  #BUILD_COMMAND ""
-
-  INSTALL_COMMAND ""
   INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0 -i ${CMAKE_INSTALL_PREFIX}
   #CONFIGURE_COMMAND cmake -E environment
   BINARY_DIR ${CMAKE_BINARY_DIR}/build/
@@ -59,38 +56,6 @@ ExternalProject_Add(
   
 )
 
-#if (UNIX)
-#  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
-#                 ${CMAKE_BINARY_DIR}
-#                 COPYONLY)
-#  execute_process(COMMAND 
-#    bash build_ace.sh -p linux -v ${ACE_VERSION} -j2
-#    RESULT_VARIABLE HAS_BUILT
-#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#  )
-#elseif (APPLE)
-#  configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
-#                 ${CMAKE_BINARY_DIR}
-#                 COPYONLY)
-#  execute_process(COMMAND 
-#    bash build_ace.sh -p macosx -v ${ACE_VERSION} -j2
-#    RESULT_VARIABLE HAS_BUILT
-#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#  )
-#else()
-#  message(FATAL_ERROR "Builds only on Linux and MacOSX so far")
-#endif()
-
-
-#if (${HAS_BUILT})
-#  message(FATAL_ERROR "Configure or build error occurred.")
-#endif()
-
-#add_custom_target(libACE ALL
-#    command make -j2
-#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/ace
-#    VERBATIM
-#)
 if (UNIX)
 	install(FILES
 		${CMAKE_BINARY_DIR}/src/install/lib/libACE.so
