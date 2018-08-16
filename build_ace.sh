@@ -22,7 +22,7 @@
 version="6.4.7"
 threads=1
 is_build="1"
-while getopts p:v:j:s:i:b:h option
+while getopts p:v:j:s:i:b:l:h option
  do
  case "${option}"
   in
@@ -30,7 +30,7 @@ while getopts p:v:j:s:i:b:h option
   v) version=$OPTARG;;
   j) threads=$OPTARG;;
   s) src=$OPTARG;;
-  i) INSTALL_DIR=${OPTARG};;
+  l) INSTALL_DIR=${OPTARG};;
   i) INCLUDE_DIR=${OPTARG};;
   b) is_build=${OPTARG};;
   h)
@@ -49,6 +49,8 @@ done
 
 echo $target
 echo $version
+echo "INSTALL_DIR " $INSTALL_DIR
+echo "INCLUDE_DIR " $INCLUDE_DIR
 
 #mkdir src 
 #cd src 
