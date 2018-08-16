@@ -31,6 +31,7 @@ while getopts p:v:j:s:i:b:h option
   j) threads=$OPTARG;;
   s) src=$OPTARG;;
   i) INSTALL_DIR=${OPTARG};;
+  i) INCLUDE_DIR=${OPTARG};;
   b) is_build=${OPTARG};;
   h)
    echo "Usage: $0 -p platform [-v ACE_Version]"
@@ -112,6 +113,6 @@ elif [ $target = "macosx" ] ; then
   cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
 fi
-rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INSTALL_DIR}/include
-rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INSTALL_DIR}/include
+rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}/include
+rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}/include
 fi
