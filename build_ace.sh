@@ -22,7 +22,7 @@
 version="6.4.7"
 threads=1
 is_build="1"
-while getopts p:v:j:s:i:b:l:h option
+while getopts p:v:j:s:l:i:b:h option
  do
  case "${option}"
   in
@@ -115,6 +115,6 @@ elif [ $target = "macosx" ] ; then
   cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
 fi
-rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}/include
-rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}/include
+rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
 fi
