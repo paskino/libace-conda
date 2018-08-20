@@ -42,7 +42,8 @@ ExternalProject_Add(
   URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
   CONFIGURE_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/configure_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
 
-  BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
+  BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -l ${LIBRARY_DIR} -i ${INCLUDE_DIR}
+
 
   INSTALL_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1 -b 0 -l ${LIBRARY_DIR} -i ${INCLUDE_DIR}
   LOG_INSTALL 1
