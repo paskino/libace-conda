@@ -22,7 +22,7 @@
 version="6.4.7"
 threads=1
 is_build="1"
-while getopts p:v:j:s:i:b:h option
+while getopts p:v:j:s:l:i:b:h option
  do
  case "${option}"
   in
@@ -30,7 +30,8 @@ while getopts p:v:j:s:i:b:h option
   v) version=$OPTARG;;
   j) threads=$OPTARG;;
   s) src=$OPTARG;;
-  i) INSTALL_DIR=${OPTARG};;
+  l) INSTALL_DIR=${OPTARG};;
+  i) INCLUDE_DIR=${OPTARG};;
   b) is_build=${OPTARG};;
   h)
    echo "Usage: $0 -p platform [-v ACE_Version]"
@@ -48,6 +49,8 @@ done
 
 echo $target
 echo $version
+echo "INSTALL_DIR " $INSTALL_DIR
+echo "INCLUDE_DIR " $INCLUDE_DIR
 
 #mkdir src 
 #cd src 
@@ -112,6 +115,7 @@ elif [ $target = "macosx" ] ; then
   cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
 fi
-rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace/ ${INSTALL_DIR}/include
-rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace/ ${INSTALL_DIR}/include
+rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rv --include '*/' --include '*.cpp' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
 fi
