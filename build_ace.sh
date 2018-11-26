@@ -47,6 +47,9 @@ while getopts p:v:j:s:l:i:b:h option
  esac
 done
 
+INSTALL_DIR=`realpath ${INSTALL_DIR}`
+INCLUDE_DIR=`realpath ${INCLUDE_DIR}`
+
 echo $target
 echo $version
 echo "INSTALL_DIR " $INSTALL_DIR
