@@ -4,7 +4,7 @@
 # build system of ACE
 export SAVE_BUILD=${BUILD}
 export BUILD=
-export ARCH=
+#export ARCH=
 mkdir ${SRC_DIR}/build
 rsync -az --exclude=.git ${RECIPE_DIR}/../ ${SRC_DIR}/build
 mkdir ${SRC_DIR}/build/build

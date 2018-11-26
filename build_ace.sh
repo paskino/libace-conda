@@ -72,14 +72,14 @@ cd ${WORKING_DIR}
 mkdir -p $INSTALL_DIR
 if [ $target = "linux" ] ; then
   
-  cp -v ${ACE_ROOT}/ace/libACE.so.${version} ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/${ARCH}/libACE.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE.so ] ; then
     rm  ${INSTALL_DIR}/libACE.so
   fi
   ln -s ${INSTALL_DIR}/libACE.so.${version} ${INSTALL_DIR}/libACE.so
 
-  cp -v ${ACE_ROOT}/ace/ETCL/libACE_ETCL.so.${version} ${INSTALL_DIR}
-  cp -v ${ACE_ROOT}/ace/ETCL/libACE_ETCL_Parser.so.${version} ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/ETCL/${ARCH}/libACE_ETCL.so.${version} ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/ETCL/${ARCH}/libACE_ETCL_Parser.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_ETCL.so ] ; then
     rm  ${INSTALL_DIR}/libACE_ETCL.so
   fi
@@ -89,18 +89,19 @@ if [ $target = "linux" ] ; then
   fi
   ln -s ${INSTALL_DIR}/libACE_ETCL_Parser.so.${version} ${INSTALL_DIR}/libACE_ETCL_Parser.so
 
-  cp -v ${ACE_ROOT}/ace/Compression/libACE_Compression.so.${version} ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/Compression/${ARCH}/libACE_Compression.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_Compression.so ] ; then
     rm  ${INSTALL_DIR}/libACE_Compression.so
   fi
   ln -s ${INSTALL_DIR}/libACE_Compression.so.${version} ${INSTALL_DIR}/libACE_Compression.so
-  cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.so.${version} ${INSTALL_DIR}
+
+  cp -v ${ACE_ROOT}/ace/Compression/rle/${ARCH}/libACE_RLECompression.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_RLECompression.so ] ; then
     rm  ${INSTALL_DIR}/libACE_RLECompression.so
   fi
   ln -s ${INSTALL_DIR}/libACE_RLECompression.so.${version} ${INSTALL_DIR}/libACE_RLECompression.so
 
-  cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
+  cp -v ${ACE_ROOT}/ace/Monitor_Control/${ARCH}/libACE_Monitor_Control.so.${version} ${INSTALL_DIR}
   if [ -h ${INSTALL_DIR}/libACE_Monitor_Control.so ] ; then
     rm  ${INSTALL_DIR}/libACE_Monitor_Control.so
   fi
