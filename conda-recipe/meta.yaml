@@ -8,50 +8,15 @@ build:
     
 requirements:
   build:
-    #- boost ==1.64.0	
-    #- boost-cpp ==1.64.0 
-#    - boost
-#    - boost-cpp
-#    - python 3.6 # [py36]
-#    - python 2.7 # [py27]
-    - cmake >=3.1
+    - cmake >=3.9
     - vc 14 # [win and py36] 
     - vc 9  # [win and py27]
-    - gcc_linux-64
-    - gxx_linux-64
-#    - numpy
-#    - scipy
-#    - matplotlib
-#    - docopt
-#    - h5py
-#    - libxml2
-#    - psutil
-#    - nose
-#    - coverage
-#    - fftw
-#    - swig >=3
-#    - libxslt
-
-
   run:
     - vc 14 # [win and py35]
     - vc 9  # [win and py27]
-#    - python 3.6 # [py36]
-#    - python 2.7 # [py27]
-#    - numpy
-#    - scipy
-#    - matplotlib
-#    - docopt
-#    - h5py
-#    - psutil
-#    - fftw
-#    - libgcc-ng
-#    - libstdcxx-ng
-#    - openblas
-
 	
 about:
-  home: http://www.ccppetmr.ac.uk
+  home: http://www.dre.vanderbilt.edu/~schmidt/ACE-overview.html
   license:  Apache 2.0 license
-  summary: 'Synergistic Image Reconstruction Framework'
+  summary: 'ADAPTIVE Communication Environment Conda recipe'
 
