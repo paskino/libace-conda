@@ -119,7 +119,7 @@ elif [ $target = "macosx" ] ; then
   cp -v ${ACE_ROOT}/ace/Compression/rle/libACE_RLECompression.dylib ${INSTALL_DIR}
   cp -v ${ACE_ROOT}/ace/Monitor_Control/libACE_Monitor_Control.dylib ${INSTALL_DIR}
 fi
-rsync -rv --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
-rsync -rv --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
-rsync -rv --include '*/' --include '*.cpp' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rvL --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rvL --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+rsync -rvL --include '*/' --include '*.cpp' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
 fi
