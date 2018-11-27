@@ -31,5 +31,5 @@ cmake -G "Unix Makefiles" \
 
 #cmake -G "Unix Makefiles" -DLIBRARY_LIB="%CONDA_PREFIX%\lib" -DLIBRARY_INC="%CONDA_PREFIX%" -DCMAKE_INSTALL_PREFIX="%PREFIX%\Library" -DINSTALL_LIB_DIR="%PREFIX%\Library\lib" -DINSTALL_BIN_DIR="%PREFIX%\Library\bin" -DINSTALL_INCLUDE_DIR="%PREFIX%\Library\include" "%SRC_DIR%\build" 
 
-make -j2 VERBOSE=1
+make VERBOSE=1
 export BUILD=${SAVE_BUILD}
