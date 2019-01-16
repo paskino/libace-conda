@@ -24,10 +24,10 @@ include(ExternalProject)
 
 set(ACE_VERSION "6.4.7" CACHE  STRING "ACE version")
 
-if (UNIX)
-  set (platform "linux")
-elseif(APPLE)
+if (APPLE)
   set (platform "macosx")
+elseif(UNIX)
+  set (platform "linux")
 endif()
 
 configure_file(${CMAKE_SOURCE_DIR}/build_ace.sh 
