@@ -121,5 +121,5 @@ elif [ $target = "macosx" ] ; then
 fi
 rsync -rvL --include '*/' --include '*.h' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
 rsync -rvL --include '*/' --include '*.inl' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
-rsync -rvL --include '*/' --include '*.cpp' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
+# rsync -rvL --include '*/' --include '*.cpp' --exclude '*' --prune-empty-dirs ${ACE_ROOT}/ace ${INCLUDE_DIR}
 fi
