@@ -22,7 +22,7 @@ cmake_minimum_required(VERSION 3.9.0)
 project(libACE)
 include(ExternalProject)
 
-set(ACE_VERSION "6.4.7" CACHE  STRING "ACE version")
+set(ACE_VERSION "6.5.9" CACHE  STRING "ACE version")
 
 if (APPLE)
   set (platform "macosx")
@@ -38,8 +38,8 @@ configure_file(${CMAKE_SOURCE_DIR}/configure_ace.sh
                   COPYONLY)
 ExternalProject_Add(
   ACE
-  #URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
-  URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
+  URL http://download.dre.vanderbilt.edu/previous_versions/ACE-${ACE_VERSION}.zip
+  #URL https://www.ccppetmr.ac.uk/sites/www.ccppetmr.ac.uk/files/downloads/ACE-6.4.7.zip
   CONFIGURE_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/configure_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 1
 
   BUILD_COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/build_ace.sh -p ${platform} -s ${CMAKE_CURRENT_BINARY_DIR}/source -j 2 -l ${LIBRARY_DIR} -i ${INCLUDE_DIR}
